@@ -2,6 +2,8 @@
 
 **AnaliticsGroups Suite** es un conjunto de herramientas de escritorio desarrolladas en Python para el análisis de dinámicas grupales. La suite unifica tres aplicaciones especializadas en un único lanzador para una experiencia de usuario integrada.
 
+En esta actualizacion se agregan la auto-percepcion y sus consecuentes analisis (estas no se encuentran en los colabs solo en el ejecutable).
+
 ## Aplicaciones Incluidas
 
 La suite se compone de un lanzador principal y tres módulos de análisis:
