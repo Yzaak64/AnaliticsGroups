@@ -1,4 +1,4 @@
-# Hemphill_App.py (Lanzador Principal - Versión Definitiva)
+# Hemphill_App.py (Lanzador Principal - Versión Corregida)
 
 import sys
 import os
@@ -10,33 +10,35 @@ if script_dir not in sys.path:
     sys.path.insert(0, script_dir)
 
 try:
-    # Importar las funciones y clases necesarias de tus otros archivos.
     from popapp import show_coffee_popup
     from app_logic import HemphillApp
 except ImportError as e:
-    # Si falta un archivo .py, muestra un error claro y sale.
     print(f"ERROR: No se pudo importar un módulo necesario: {e}")
-    # En un .exe, este input no se verá, pero es útil para depurar.
     input("Presiona Enter para salir...")
     sys.exit(1)
 
 
 if __name__ == "__main__":
     try:
-        # 1. Mostrar el pop-up de apoyo primero.
-        #    Esta función detiene la ejecución del programa hasta que el usuario
-        #    cierra el popup.
+        # 1. Crear la aplicación principal (la raíz única de Tkinter)
+        app = HemphillApp()
+        # 2. Ocultarla temporalmente para que solo se vea el popup
+        app.withdraw()
+
+        # 3. Mostrar el popup. La ejecución del código se pausará aquí
+        #    hasta que el popup sea cerrado por el usuario.
+        #    Le pasamos 'app' como su ventana "madre".
         print("Mostrando pop-up de apoyo...")
-        show_coffee_popup()
+        show_coffee_popup(app)
         print("Pop-up cerrado. Iniciando aplicación principal...")
 
-        # 2. Una vez que el popup se ha cerrado, crear e iniciar la
-        #    aplicación principal desde app_logic.py.
-        app = HemphillApp()
+        # 4. Una vez que el popup se cierra, mostramos la ventana principal
+        app.deiconify()
+        
+        # 5. Iniciar el único y principal mainloop
         app.mainloop()
         
     except Exception as e:
-        # Captura cualquier error fatal que no haya sido manejado dentro de la app.
         print(f"ERROR FATAL en la aplicación principal: {e}")
         traceback.print_exc()
         input("Presiona Enter para salir...")
